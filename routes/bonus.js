@@ -1,13 +1,16 @@
 var express = require('express');
+const { param } = require('./users');
 var router = express.Router();
+var rand = Math.random().toFixed(2);
 
 
+console.log(rand);
 /* GET home page. */
 router.get('/', function(req, res, next) {
-var a = Math.floor(Math.random()*10);
-var b = Math.floor(Math.random()*10);
-  res.render('bonus',{Calc:"Math.pow() applied to :("+a+","+b+")"+`\n`+
-            "Result is :"+ Math.floor(Math.pow(a,b))});
+  if (req.query.rand != undefined) {
+    rand = req.query.rand;
+  } 
+  res.render('bonus',
+   { Calc: 'Tanh of (' +rand+') is \n'+Math.tanh(rand)});
 });
-
 module.exports = router;
