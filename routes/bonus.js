@@ -1,16 +1,32 @@
 var express = require('express');
-const { param } = require('./users');
 var router = express.Router();
-var rand = Math.random().toFixed(2);
 
+/* GET computation page. */
+router.get('/', function (req, res, next) {
+  var rand;
+  
+  var random = Math.random();
+  console.log(req.query.rand);
+  x = req.query.rand;
 
-console.log(rand);
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  if (req.query.rand != undefined) {
-    rand = req.query.rand;
-  } 
-  res.render('bonus',
-   { Calc: 'Tanh of (' +rand+') is \n'+Math.tanh(rand)});
+  // checking if url has params
+  if (rand == undefined) {
+    rand = random;
+  }
+  
+  let pow = Math.pow(rand,rand) 
+  let sign =Math.sign(rand)
+  let tanh = Math.tanh(rand)
+  let atrun = Math.trunc(rand);
+ 
+  res.render('bonus', {
+    title: 'Mahesh Kumar Computation',
+    Calculate: `applied to ` + rand  + ` is ` + pow ,
+    c1: `applied to ` + rand + ` is ` + sign,
+    c2: `applied to ` + rand + ` is ` + tanh,
+    c3: `applied to ` + rand + ` is ` + atrun,
+    
+  });
 });
+
 module.exports = router;
